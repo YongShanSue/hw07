@@ -18,7 +18,7 @@ int main(int argc,char **argv){
     struct timeval start;               //Variable start time
     struct timeval stop;                //Variable stop timei
     double tol=0.000000001;
-    int maxiter=1000;
+    int maxiter=10000;
     double condition_number;
     double mu=0.5;
     
@@ -34,7 +34,7 @@ int main(int argc,char **argv){
     }
     MAT A = linearsystem;
 
-	/*
+	
     gettimeofday(&start,NULL);			//Record star time
     iteration_number= EVqr(A,tol,maxiter);						//QR iteration
     gettimeofday(&stop,NULL);			//Record star time
@@ -42,16 +42,18 @@ int main(int argc,char **argv){
     for(int i=0;i<circuit_dim;i++)
     	lambda[i]=A[i][i];				//Assign eigenvalues
     //A.print();
-    printf("%d\t%d\t%lf\t\t",circuit_dim,iteration_number,duration);
-    */
+    printf("QR:\nMatrix size:%d\tIteration number:%d\tCPU Time:%lf\t\t\n",circuit_dim,iteration_number,duration);
+    
+    
     A = linearsystem;
     gettimeofday(&start,NULL);			//Record star time
     iteration_number= EVqrShifted(A,mu,tol,maxiter);			//Shifted QR iteration
     gettimeofday(&stop,NULL);			//Record star time
 	duration=(stop.tv_sec-start.tv_sec)+(stop.tv_usec-start.tv_usec)/1000000.0;    
     for(int i=0;i<circuit_dim;i++)
-    	lambda[i]=A[i][i];				//Assign eigenvalues
-	 printf("%d\t%d\t%lf\t\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t\n",circuit_dim,iteration_number,duration,lambda[0],lambda[1],lambda[2],lambda[circuit_dim-3],lambda[circuit_dim-2],lambda[circuit_dim-1]);
+    	lambda[i]=A[i][i];				//Assign eiIteration number:genvalues
+        
+	 printf("Shifted QR:\nMatrix size:%d\tIteration number:%d\tCPU Time:%lf\tlambda:\n%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t\n",circuit_dim,iteration_number,duration,lambda[0],lambda[1],lambda[2],lambda[circuit_dim-3],lambda[circuit_dim-2],lambda[circuit_dim-1]);
 	 
     return 0;
 }	

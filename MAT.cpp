@@ -660,6 +660,7 @@ int EVqr(MAT &A,double tol,int maxiter){
 			if(A[i][i-1]>err)
 				err=A[i][i-1];
 		count++;
+
 	}
 	return count;
 
@@ -698,6 +699,7 @@ int EVqrShifted(MAT &A,double mu,double tol,int maxiter){
 			if(fabs(A[i][i-1])>err)
 				err=fabs(A[i][i-1]);
 		count++;
+		//printf("%d\t%g\t%g\n",count,err,A[0][0]);
 	}
 	return count;
 }
